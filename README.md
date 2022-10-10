@@ -1,6 +1,6 @@
 # Lab 02
 
-# Project name: Math Series
+# Project name: Madlib CLI
 
 ## Author: Mohammad Alfayoume
 
