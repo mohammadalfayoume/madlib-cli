@@ -5,12 +5,20 @@ path="assets/make_me_a_video_game_template.txt"
 ### Test the code ##
 
 def read_template(test_path):
+    '''
+    test_path: str
+    return: str
+    '''
     with open(test_path) as reader:
         content= reader.read()
         return content
    
 
 def parse_template(content):
+    '''
+    content: str
+    return: tuple[ str , tuple ]
+    '''
     
     strip_content=re.sub(r'{[^}]*}','{}', content)
     words=tuple(re.findall('{[^}]*}', content))
@@ -25,6 +33,11 @@ def parse_template(content):
 
 
 def merge(stripped_text,keys):
+    '''
+    stripped_text: str
+    keys: tuple
+    return: str
+    '''
     with open("assets/dark_and_stormy_night_ouput.txt", "w") as f:
         final_story=stripped_text.format(*keys)
         f.write(final_story)
@@ -35,7 +48,9 @@ def merge(stripped_text,keys):
 ### Ask the user to create his own story ^^ ###
 
 def story():
-
+    '''
+    output: str
+    '''
     content=read_template(path)
     parse_template_contant=parse_template(content)
     strip_content=parse_template_contant[0]
@@ -46,6 +61,9 @@ def story():
         print("Goodbye :)")
     else:
         def welecome_msg():
+            '''
+            output: str
+            '''
             print('''
     ** Welecome to madlibs game **
     ** Mad Libs are a word replacement game **
@@ -56,6 +74,9 @@ def story():
     ''')
 
         def insert_data_from_user():
+            '''
+            return: list
+            '''
             list=[]
             for key in keys:
                 list.append(input(f"{key}: "))
@@ -63,6 +84,11 @@ def story():
             return list
 
         def merge_story(stripped_text,keys):
+            '''
+            stripped_text: str
+            keys: tuple
+            return: str
+            '''
             with open("assets/make_me_a_video_game_output.txt", "w") as f:
                 final_story=stripped_text.format(*keys)
                 f.write(final_story)
