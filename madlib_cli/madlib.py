@@ -1,5 +1,9 @@
 import re
 
+path="assets/make_me_a_video_game_template.txt"
+
+### Test the code ##
+
 def read_template(test_path):
     with open(test_path) as reader:
         content= reader.read()
@@ -7,10 +11,9 @@ def read_template(test_path):
    
 
 def parse_template(content):
-
+    
     strip_content=re.sub(r'{[^}]*}','{}', content)
     words=tuple(re.findall('{[^}]*}', content))
-
     list=[]
 
     for i in range(len(words)):
@@ -20,10 +23,53 @@ def parse_template(content):
 
     return(strip_content,keys)
 
-    
 
 def merge(stripped_text,keys):
-    with open("assets/make_me_a_video_game_output.txt", "w") as f:
+    with open("assets/dark_and_stormy_night_ouput.txt", "w") as f:
         final_story=stripped_text.format(*keys)
         f.write(final_story)
         return final_story
+
+
+
+### Ask the user to create his own story ^^ ###
+
+def story():
+
+    content=read_template(path)
+    parse_template_contant=parse_template(content)
+    strip_content=parse_template_contant[0]
+    keys=parse_template_contant[1]
+
+    ask=input("Do you want to play?(y/n): ")
+    if ask != "y":
+        print("Goodbye :)")
+    else:
+        def welecome_msg():
+            print('''
+    ** Welecome to madlibs game **
+    ** Mad Libs are a word replacement game **
+    ** so you will enter some words and then **
+    ** it will replaced in a paragraph it **
+    ** may be a funny and you will laugh ... **
+    ** just answer the questions and press enter.. **
+    ''')
+
+        def insert_data_from_user():
+            list=[]
+            for key in keys:
+                list.append(input(f"{key}: "))
+            print("\n")
+            return list
+
+        def merge_story(stripped_text,keys):
+            with open("assets/make_me_a_video_game_output.txt", "w") as f:
+                final_story=stripped_text.format(*keys)
+                f.write(final_story)
+                return final_story
+
+        welecome_msg()
+        story=merge_story(strip_content,insert_data_from_user())
+        print(story)
+
+story()
